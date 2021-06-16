@@ -1,0 +1,3 @@
+class UserLocation{
+    Name:string
+}

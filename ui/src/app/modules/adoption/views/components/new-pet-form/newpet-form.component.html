@@ -1,0 +1,90 @@
+<div class="form-container">
+  <div class="header">
+    <span class="header-text"> Find new home for pet</span>
+    <span class="close"></span>
+  </div>
+  <div class="content m-y-md">
+    <form [formGroup]="petForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <select formControlName="petType" class="custom-select">
+            <option VALUE="" selected>Pet's type</option>
+            <option value="1">Dog</option>
+            <option value="2">Cat</option>
+            <option value="3">Others</option>
+          </select> 
+        </div>
+
+      </div>
+      <div class="form-row">
+
+        <div class="form-group col-md-12">
+          <input type="text" class="form-control" formControlName="breed" id="breed" placeholder="Pet's Breed">
+        </div>
+      </div>
+      <div class="form-row">
+
+        <div class="form-group col-md-12">
+          <input type="number" class="form-control" formControlName="age" id="petage" placeholder="Pet's Age">
+        </div>
+      </div>
+      <div class="form-row">
+
+        <div class="form-group col-md-12">
+          <select formControlName="gender" class="custom-select">
+            <option value="" selected>Pet's gender</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+          </select>
+        </div>
+      </div>
+    
+      <div class="form-row">
+
+        <div class="form-group col-md-12">
+          <input type="text" class="form-control" formControlName="name" id="pName" placeholder="Pet's Name(Optional)">
+        </div>
+      </div>
+     
+    
+
+
+      <div class="form-row">
+
+        <div class="form-group col-md-6">
+          <input type="text" class="form-control" formControlName="pincode" id="pincode" placeholder="Your pin code">
+
+        </div>
+        <div class="form-group col-md-6">
+          <input type="text" class="form-control" formControlName="contact" id="ctct" placeholder="Your mobile Contact">
+        </div>
+      </div>
+    
+
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          
+          <button type="button" (click)="fileUpload.click()" class="btn btn-image btn-sm btn-outline-warning">
+            <i class="bi bi-file-image"></i>Upload Photo
+          </button>
+          <input type="file" hidden formControlName="image" (change)="onFileChange($event)" accept="image/*"
+            #fileUpload>
+        </div>
+
+      </div>
+      <div class="form-row" *ngIf="imageSrc">
+        <div class="form-group col-md-12">
+          <div class=" img-container">
+            <img class="shadowed-ele rounded-img" [src]="imageSrc" style="width:200px;height: 150px;">
+            <i class="bi bi-x-circle-fill close-icon"></i>
+          </div>
+        </div>
+      </div>
+
+
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="!petForm.valid">Submit</button>
+
+    </form>
+  </div>
+</div>
