@@ -10,3 +10,7 @@ hooks:
   ApplicationStop:
     - location: Scripts/stop_server.sh
       timeout: 3600     
+artifacts:
+  files:
+    - '**/*'
+    name: s3-to-s3-latest-build.zip      
