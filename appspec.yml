@@ -1,4 +1,4 @@
-version: 0.3
+version: 0.0
 os: linux
 files:
   - source: /
@@ -10,7 +10,4 @@ hooks:
   ApplicationStop:
     - location: Scripts/stop_server.sh
       timeout: 3600     
-artifacts:
-  files:
-    - '**/*'
-  name: myname-$(date +%Y-%m-%d)    
+   
