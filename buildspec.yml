@@ -1,4 +1,4 @@
-version: 0.2
+version: 0.3
 os: linux
 files:
   - source: /
@@ -13,4 +13,4 @@ hooks:
 artifacts:
   files:
     - '**/*'
-    name: s3-to-s3-latest-build.zip      
+  name: myname-$(date +%Y-%m-%d)    
