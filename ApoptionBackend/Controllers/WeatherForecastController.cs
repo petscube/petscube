@@ -13,7 +13,7 @@ namespace FullStackDevExercise.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-            "a", "b", "c", "d", "e"
+            "gunjan"
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
