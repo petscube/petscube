@@ -28,5 +28,19 @@ namespace FullStackDevExercise.Controllers
         {
            return Summaries;
         }
+    [HttpGet]
+    [Route("test")]
+    public String GetKey()
+    {
+      if(Request.Headers.ContainsKey("Shared-Api-Token"))
+      {
+        return Request.Headers["Shared-Api-Token"].ToString();
+      }
+      else
+      {
+        return "not found";
+      }
+    }
+
     }
 }

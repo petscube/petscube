@@ -15,7 +15,7 @@ namespace AdoptionBackend.Controllers
 {
   
   [ApiController]
-  [Route("api/adoption")]
+  [Route("adoption")]
   public class PetsController : BaseController
   {
     private IPetService _petService;
@@ -29,8 +29,14 @@ namespace AdoptionBackend.Controllers
     public async Task<Pet> Get(string id)
     {
       return await _petService.Get(id);
+     
     }
-
+    [HttpGet]
+    
+    public async Task<IEnumerable<string>> GetAll()
+    {
+      return await Task.FromResult(new string[] { "GUnjan" });
+    }
     // GET api/<ValuesController>/5
     [HttpGet("/search/{category}/{breed}")]
     public async Task<IEnumerable<Pet>> Get(string category,string breed, [FromQuery] int startIndex,int count)
