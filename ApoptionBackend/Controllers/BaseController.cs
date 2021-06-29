@@ -16,7 +16,7 @@ namespace AdoptionBackend.Controllers
     {
       if (User != null)
       {
-        _userEmail = User.FindFirst(ClaimTypes.Email).Value;
+        _userEmail = User.FindFirst("UserId").Value;
         _pinCode = User.FindFirst("PinCode").Value;
       }
     }

@@ -36,7 +36,7 @@ namespace AdoptionBackend.security
       {
         var claims = new[] {
 
-                    new Claim(ClaimTypes.Email, Request.Headers["Email"].ToString()),
+                    new Claim("UserId", Request.Headers["UserId"].ToString()),
                     new Claim("Pincode", Request.Headers["PinCode"].ToString()),
                     };
 

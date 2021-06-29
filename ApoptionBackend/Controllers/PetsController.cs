@@ -47,10 +47,18 @@ namespace AdoptionBackend.Controllers
 
     // POST api/<ValuesController>
     [HttpPost]
-    [Authorize(AuthenticationSchemes = HeaderAuthenticationSchemeOption.Name)]
-    public void Post([FromBody] Pet pet)
+    //[Authorize(AuthenticationSchemes = HeaderAuthenticationSchemeOption.Name)]
+    public async Task<string> Post([FromForm] Pet pet)
     {
-        this._petService.Add(pet);
+       if(pet.Image!=null)
+      {
+        return await Task.FromResult("found");
+      }
+      else
+      {
+        return await Task.FromResult("not found");
+      }
+       // this._petService.Add(pet);
     }
 
     // PUT api/<ValuesController>/5
