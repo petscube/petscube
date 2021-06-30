@@ -12,7 +12,7 @@ namespace Repositories.DbContext
     public AppDBContext(IConfiguration configuration)
     {
       var connString = configuration.GetValue<string>("DbSetting:ConnectionString");
-      var client = new MongoClient("mongodb+srv://petscubeadoption:Think%40321@cluster0.dupod.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+      var client = new MongoClient(connString);
       db = client.GetDatabase(configuration.GetValue<string>("DbSetting:DbName"));
     }
 

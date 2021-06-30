@@ -11,6 +11,7 @@ namespace Domain
   {
      
    public string Name { get; set; }
+    public string FileName { get; set; }
    public int Age { get; set; }
    public string Contact { get; set; }
     public string Gender { get; set; }

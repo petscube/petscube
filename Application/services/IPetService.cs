@@ -10,5 +10,6 @@ namespace Application.services
   {
     Task<IEnumerable<Pet>> SearchPets(string category, string breed,
       string pinCode, int startIndex, int count);
+    
   }
 }

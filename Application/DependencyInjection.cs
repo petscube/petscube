@@ -1,3 +1,4 @@
+using Application.Helpers;
 using Application.services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,6 +14,7 @@ namespace Application
       services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
       services.AddSingleton(typeof(IBaseService<>), typeof(BaseService<>));
       services.AddSingleton<IPetService, PetService>();
+      services.AddSingleton<IFileHelper, AwsFileHelper>();
       //map dependency injection here
       return services;
     }
