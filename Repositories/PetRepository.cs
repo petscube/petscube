@@ -18,7 +18,7 @@ namespace Repositories
     public async Task<IEnumerable<Pet>> SearchPets(string category, string breed,
       string pinCode,int startIndex,int count)
     {
-      var res = await _collection.Find<Pet>(obj => obj.PinCode==pinCode &&
+      var res = await _collection.Find<Pet>(obj => 
       obj.Breed==breed && obj.Category==category).Skip(startIndex).
        Limit(count).ToListAsync();
       return res;
