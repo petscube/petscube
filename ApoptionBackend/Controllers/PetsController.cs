@@ -30,39 +30,40 @@ namespace AdoptionBackend.Controllers
     {
       return await _petService.Get(id);
      
-    }
-    [HttpGet]
-    
-    public async Task<IEnumerable<string>> GetAll()
+    } 
+    [HttpGet("GetByEmail/{email?}")]
+    public async Task<IEnumerable<Pet>> GetByEmail(string email="")
     {
-      return await Task.FromResult(new string[] { "GUnjan" });
+      return await _petService.GetPetsByEmail(email);
     }
     // GET api/<ValuesController>/5
-    [HttpGet("/search/{category}/{breed}")]
-    public async Task<IEnumerable<Pet>> Get(string category,string breed, [FromQuery] int startIndex,int count)
+    [HttpGet("search/{latitude}/{longitude}")]
+    public async Task<IEnumerable<Pet>> Get(double latitude,double longitude,
+     [FromQuery] string filterType,[FromQuery] string filterValue,[FromQuery] int startIndex,[FromQuery] int count)
     {
      
-      return await _petService.SearchPets(category, breed, _pinCode, startIndex, count);
+      return await _petService.SearchPets(latitude, longitude,filterType,filterValue, startIndex, count);
     }
-
+     
     // POST api/<ValuesController>
     [HttpPost]
     //[Authorize(AuthenticationSchemes = HeaderAuthenticationSchemeOption.Name)]
     public async Task Post([FromForm] Pet pet)
     {
+      for(var i = 0; i < 50; i++)
+      {
+        pet.Breed = pet.Breed + " " + i.ToString();
+        pet.Id = null;
         await this._petService.Add(pet);
+      }
+      //await this._petService.Add(pet);
     }
-
-    // PUT api/<ValuesController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-    }
-
+ 
     // DELETE api/<ValuesController>/5
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    public void Delete(string id)
     {
+      this._petService.Delete(id);
     }
   }
 }

@@ -17,22 +17,25 @@ namespace Application.services
       _petrepo = petRepo;
       this._fileHelper = fileHelper;
     }
-    public async Task<IEnumerable<Pet>> SearchPets(string category, string breed,
-      string pinCode, int startIndex, int count)
+    public async Task<IEnumerable<Pet>> GetPetsByEmail(string email)
     {
-      return await _petrepo.SearchPets(category, breed,
-       pinCode,  startIndex, count);
+      return await _petrepo.GetPetsByEmail(email);
+    }
+    public async Task<IEnumerable<Pet>> SearchPets(double latitude, double longitude, string filterType,
+      string filterValue, int startIndex, int count)
+    {
+      return await _petrepo.SearchPets(latitude,longitude,filterType,filterValue, startIndex, count);
     }
     public new async Task Add(Pet pet)
     {
       var image = pet.Image;
       if (image != null)
       {
-         await _fileHelper.UploadFile(image.OpenReadStream(),DateTime.Now.Ticks.ToString()+image.FileName);
-      }
-
-      pet.FileName = image.FileName;
-      pet.Image = null;
+        var fileName = DateTime.Now.Ticks.ToString() + "_" + image.FileName;
+         await _fileHelper.UploadFile(image.OpenReadStream(),fileName);
+         pet.FileName = fileName;
+      } 
+      pet.PrepareForInsertion();
       await base.Add(pet);
     }
   }

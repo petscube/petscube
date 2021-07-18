@@ -11,21 +11,29 @@ using Microsoft.Extensions.Configuration;
 
 namespace Application.Helpers
 {
-  public class AwsFileHelper :IFileHelper 
+  public class AwsFileHelper : IFileHelper
+  {
+    private readonly RegionEndpoint bucketRegion = RegionEndpoint.APSouth1;
+    private string bucketName;
+    private TransferUtility fileTransferUtility;
+    public AwsFileHelper(IConfiguration configuration)
     {
-      private readonly RegionEndpoint bucketRegion= RegionEndpoint.APSouth1;
-      private IAmazonS3 s3Client;
-      private string bucketName;
-      public AwsFileHelper(IConfiguration configuration)
+      bucketName = configuration.GetValue<string>("AWSConfigs:S3Bucket");
+      var s3Client = new AmazonS3Client(bucketRegion);
+      fileTransferUtility = new TransferUtility(s3Client);
+    }
+    public async Task UploadFile(Stream FileStream, string fileName)
+    {
+      var uploadRequest = new TransferUtilityUploadRequest
       {
-        bucketName= configuration.GetValue<string>("AWSConfigs:S3Bucket");
-        s3Client = new AmazonS3Client(bucketRegion);
-      } 
-      public async Task UploadFile(Stream FileStream,string fileName)
-      {
+        Key=fileName,
+        BucketName = bucketName,
         
-        var fileTransferUtility = new TransferUtility(s3Client);
-        await fileTransferUtility.UploadAsync(FileStream, bucketName, fileName);
-      } 
-     }
+        CannedACL = S3CannedACL.PublicRead,
+        InputStream=FileStream,
+      };
+
+      await fileTransferUtility.UploadAsync(uploadRequest);
+    }
   }
+}

@@ -8,8 +8,9 @@ namespace Application.services
 {
   public interface IPetService:IBaseService<Pet>
   {
-    Task<IEnumerable<Pet>> SearchPets(string category, string breed,
-      string pinCode, int startIndex, int count);
-    
+    Task<IEnumerable<Pet>> SearchPets(double latitude, double longitude, string filterType,
+      string filterValue, int startIndex, int count);
+    Task<IEnumerable<Pet>> GetPetsByEmail(string email);
+
   }
 }
